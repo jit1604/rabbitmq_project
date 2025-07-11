@@ -1,0 +1,26 @@
+version: "3.8"
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongo
+      - rabbitmq
+
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"  # Web UI at http://localhost:15672 (user: guest, pass: guest)
+
+  worker:
+    build: .
+    command: python worker.py
+    depends_on:
+      - rabbitmq
