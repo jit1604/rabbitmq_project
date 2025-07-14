@@ -1,4 +1,9 @@
 fastapi
-pika
 uvicorn
+pika
 pymongo
+langchain
+langchain-ollama
+sse-starlette
+
+
